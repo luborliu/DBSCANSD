@@ -13,4 +13,5 @@ More details about this algorithm can be found in [1].
 
 # Reference
 [1] Liu, Bo, et al. "Knowledge-based clustering of ship trajectories using density-based approach." Big Data (Big Data), 2014 IEEE International Conference on. IEEE, 2014.
+
 [2] Ester, Martin, et al. "A density-based algorithm for discovering clusters in large spatial databases with noise." Kdd. Vol. 96. No. 34. 1996.
