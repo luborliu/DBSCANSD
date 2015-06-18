@@ -1,5 +1,9 @@
 package boliu.util;
-
+/**
+ * Trajectory Point class
+ * @author Bo Liu
+ *
+ */
 public class TrajectoryPoint {
 	
 	private String mmsi;					//mmsi, the id of the vessel

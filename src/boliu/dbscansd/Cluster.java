@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import boliu.util.TrajectoryPoint;
 
+/**
+ * Cluster class, each cluster includes a set of trajectory points
+ * @author Bo Liu
+ *
+ */
 public class Cluster {
 	
 	private ArrayList<TrajectoryPoint> cluster ;
 	
-	private double avgSOG;
-	private double avgCOG;		//之后可以考虑在这里进行改进 改成representative points of the cluster
-
+	private double avgSOG;	//the average speed of the whole cluster, not useful so far
+	private double avgCOG;	//the average direction of the whole cluster, which is useful for calculating the GV
 	
-	//增加一个数组存储那些corepoints 的position 方便后期查找
 	public Cluster() {
 	}
 

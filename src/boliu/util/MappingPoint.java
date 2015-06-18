@@ -1,7 +1,12 @@
 package boliu.util;
 
 import boliu.util.TrajectoryPoint;
-
+/**
+ * Mapping Point is the point that is mapped onto the
+ *  axis (average direction of the whole cluster)
+ * @author Bo Liu
+ *
+ */
 public class MappingPoint extends TrajectoryPoint{
 	
 	

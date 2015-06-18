@@ -1,7 +1,11 @@
 package boliu.util;
 
 import boliu.util.TrajectoryPoint;
-
+/**
+ * Gravity Vector class, it includes lon, lat, sog, cog and median distance
+ * @author Bo Liu
+ *
+ */
 public class GravityVector extends TrajectoryPoint{
 	
 	private double medianDistance;
