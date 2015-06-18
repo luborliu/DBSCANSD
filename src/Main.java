@@ -30,7 +30,7 @@ public class Main {
 	 * @param isStopPoint	boolean condition, if the trajectory points are stopping points
 	 */
 	private static void executeAlgorithm(String inPath, String outPath, int lineNum, double eps, int minPoints, double maxSpd, double maxDir, boolean isStopPoint) {
-		Runtime rt = Runtime.getRuntime();
+		//Runtime rt = Runtime.getRuntime();
 		ArrayList<TrajectoryPoint> points = new ArrayList<TrajectoryPoint>();
 		if(!isStopPoint) {
 			points = FileIO.readFile(inPath,lineNum);
