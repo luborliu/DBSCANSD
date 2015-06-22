@@ -11,11 +11,11 @@ public class GravityVector extends TrajectoryPoint{
 	private double medianDistance;
 	
 	
-	public double getThirdQuartileDistance() {
+	public double getMedianDistance() {
 		return medianDistance;
 	}
 
-	public void setThirdQuartileDistance(double medianDistance) {
+	public void setMedianDistance(double medianDistance) {
 		this.medianDistance = medianDistance;
 	}
 

@@ -302,7 +302,7 @@ public class FileIO {
 			}	
 			
 			for(int i=0; i<ppl.size(); i++) {
-				bw.write(clusterindex+","+ppl.get(i).getLongitude()+","+ppl.get(i).getLatitude()+","+ppl.get(i).getSOG()+","+ppl.get(i).getCOG()+","+ppl.get(i).getThirdQuartileDistance()+"\n");
+				bw.write(clusterindex+","+ppl.get(i).getLongitude()+","+ppl.get(i).getLatitude()+","+ppl.get(i).getSOG()+","+ppl.get(i).getCOG()+","+ppl.get(i).getMedianDistance()+"\n");
 			}
 				
 				//System.out.println("I: "+countI+" E: "+countE);

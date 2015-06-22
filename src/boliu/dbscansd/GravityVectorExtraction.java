@@ -12,13 +12,17 @@ public class GravityVectorExtraction {
 	
 	/**
 	 * extract the GVs from the moving cluster
-	 * @param cluster
+	 * @param cluster input a cluster for extracting the GVs
 	 * @return an arraylist of GVs
 	 */
 	public static ArrayList<GravityVector> extractGravityVector(Cluster cluster) {
 		
+		//Step(1): Calculate the average COG of the whole cluster
 		double avgCOG = cluster.calculateAverageDirection();
+		
+		//Step(2) Map all the points to the axis and partition the points based on 0.01 grid width
 		ArrayList<MappingPoint> mpLst = new ArrayList<MappingPoint>();
+		
 		for(int i=0; i<cluster.getCluster().size(); i++) {	
 			MappingPoint mp = MappingPoint.convertPointToMappingPoint(cluster.getCluster().get(i), avgCOG);
 			mpLst.add(mp);
@@ -27,6 +31,7 @@ public class GravityVectorExtraction {
 		insertionSort(mpLst);
 		
 		ArrayList<GravityVector> ppL = new ArrayList<GravityVector>();
+		
 		int count = 0;
 		int k = 0;
 		double sum_x = 0;
@@ -36,86 +41,66 @@ public class GravityVectorExtraction {
 		
 		ArrayList<MappingPoint> traPointsTMP = new ArrayList<MappingPoint>();
 		double medianDistance = 0;
-		
-		while(count<mpLst.size()) {
-			if(mpLst.get(count).getMappingtude()-mpLst.get(k).getMappingtude()<0.01) {//0.1作为平分距离
+		//partition the points and calculate each GV for each cell
+		while(count<=mpLst.size()) {
+			
+			if(count<mpLst.size() && (mpLst.get(count).getMappingtude()-mpLst.get(k).getMappingtude()<0.01)) {//0.01 as the pre-defined grid width
 				sum_x = sum_x+mpLst.get(count).getLongitude();
-				sum_y = sum_y+mpLst.get(count).getLatitude();
-				
+				sum_y = sum_y+mpLst.get(count).getLatitude();				
 				sum_SOG = sum_SOG+mpLst.get(count).getSOG();
 				sum_COG = sum_COG+mpLst.get(count).getCOG();
-				
-				
-				
+			
 				traPointsTMP.add(mpLst.get(count));
 				
 				count++;
 			} else {
 				double x = 0;
-				double y = 0;
-				
+				double y = 0;				
 				double sog = 0;
 				double cog = 0;
-				if(count==k) {
-					x = mpLst.get(count).getLongitude();
-					y = mpLst.get(count).getLatitude();
-					sog = mpLst.get(count).getSOG();
-					cog = mpLst.get(count).getCOG();
-					medianDistance = 1;
-					count++;
-				} else {				
-					x = sum_x/(double)(count-k);
-					y = sum_y/(double)(count-k);
-					
-					sog = sum_SOG/(double)(count-k);
-					cog = sum_COG/(double)(count-k);
+				
+//				if(count==k) {
+//					x = mpLst.get(count).getLongitude();
+//					y = mpLst.get(count).getLatitude();
+//					sog = mpLst.get(count).getSOG();
+//					cog = mpLst.get(count).getCOG();
+//					medianDistance = 1;
+//					count++;
+//				} else {				
+				x = sum_x/(double)(count-k);
+				y = sum_y/(double)(count-k);					
+				sog = sum_SOG/(double)(count-k);
+				cog = sum_COG/(double)(count-k);
 
-					//insert median distance calculation					
-					double[] distances = new double[traPointsTMP.size()];
-					for(int i=0; i<traPointsTMP.size();i++) {
-						double lon=traPointsTMP.get(i).getLongitude();
-						double lat=traPointsTMP.get(i).getLatitude();
-						double dist = gpsDistance(lat, lon, y, x);
-						distances[i]=dist;
-						
-					}
-					//medianDistance
-					medianDistance = quartile(distances, 50);
-					//end insert median distance calculation					
+				//insert median distance calculation					
+				double[] distances = new double[traPointsTMP.size()];
+				for(int i=0; i<traPointsTMP.size();i++) {
+					double lon=traPointsTMP.get(i).getLongitude();
+					double lat=traPointsTMP.get(i).getLatitude();
+					double dist = gpsDistance(lat, lon, y, x);
+					distances[i]=dist;
+					
 				}
+				//medianDistance
+				medianDistance = quartile(distances, 50);
+				//end insert median distance calculation					
+//				}
+				
+				//for each cell of the grid, calculate its GV 
 				GravityVector gv = new GravityVector(x,y,cog,sog,medianDistance);
 				
-				ppL.add(gv);
-				
+				ppL.add(gv);				
 				sum_x = 0;
 				sum_y = 0;
 				sum_COG = 0;
 				sum_SOG = 0;
 				k = count;
 				traPointsTMP.clear();
+				
+				if(count==mpLst.size()) break;
 			}
 			
 		}
-	
-		double x = sum_x/(double)(count-k);
-		double y = sum_y/(double)(count-k);
-		double sog = sum_SOG/(double)(count-k);
-		double cog = sum_COG/(double)(count-k);
-
-		//add median distance
-		
-		double[] distances = new double[traPointsTMP.size()];
-		for(int i=0; i<traPointsTMP.size();i++) {
-			double lon=traPointsTMP.get(i).getLongitude();
-			double lat=traPointsTMP.get(i).getLatitude();
-			double dist = gpsDistance(lat, lon, y, x);
-			distances[i]=dist;			
-		}
-		
-		double secondQuartileDistance = quartile(distances, 50);
-		
-		GravityVector pp = new GravityVector(x, y, cog, sog, secondQuartileDistance);
-		ppL.add(pp);
 		return ppL;
 		
 	}

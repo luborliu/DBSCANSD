@@ -64,7 +64,7 @@ public class Cluster {
 		
 		double avg = sum/(double)(this.cluster.size());
 		
-	System.out.println("maxCOG: "+maxCOG+" minCOG: "+minCOG);
+	System.out.println("The cluster's maxCOG is "+maxCOG+" and minCOG is "+minCOG);
 		
 		return avg;
 		
