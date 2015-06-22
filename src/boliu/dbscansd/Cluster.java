@@ -1,17 +1,15 @@
 package boliu.dbscansd;
 
 import java.util.ArrayList;
-
 import boliu.util.TrajectoryPoint;
 
 /**
  * Cluster class, each cluster includes a set of trajectory points
  * @author Bo Liu
- *
  */
 public class Cluster {
 	
-	private ArrayList<TrajectoryPoint> cluster ;
+	private ArrayList<TrajectoryPoint> cluster ; 
 	
 	private double avgSOG;	//the average speed of the whole cluster, not useful so far
 	private double avgCOG;	//the average direction of the whole cluster, which is useful for calculating the GV
@@ -43,10 +41,8 @@ public class Cluster {
 		this.avgCOG = avgCOG;
 	}
 	
-	
 	public double calculateAverageDirection() {
-		double sum = 0;
-		
+		double sum = 0;		
 		double maxCOG = -1000;
 		double minCOG = 1000;
 		
@@ -58,21 +54,11 @@ public class Cluster {
 			}
 			if(this.cluster.get(i).getCOG()<minCOG) {
 				minCOG = this.cluster.get(i).getCOG();
-			}
-			
-		}
-		
+			}			
+		}		
 		double avg = sum/(double)(this.cluster.size());
+		System.out.println("The cluster's maxCOG is "+maxCOG+" and minCOG is "+minCOG);
 		
-	System.out.println("The cluster's maxCOG is "+maxCOG+" and minCOG is "+minCOG);
-		
-		return avg;
-		
+		return avg;		
 	}
-	
-	
-	
-
-
-
 }

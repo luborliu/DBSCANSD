@@ -8,8 +8,7 @@ import boliu.util.TrajectoryPoint;
 public class DBScanSD {
 	
 	private ArrayList<Cluster> resultClusters = new ArrayList<Cluster>();
-	
-	
+		
 	/**
 	 * apply DBScan algorithm on the data
 	 * @param pointsList
@@ -18,15 +17,14 @@ public class DBScanSD {
 	 * @param speed
 	 * @param direction
 	 * @param rotDifference the max ROT (rate of turn) difference
-	 * @param minrot  min ROT that can be regarded as a waypoint or turnpoint
-	 * @return
+	 * @return the clustering results, which is a set of clusters
 	 */
 	public ArrayList<Cluster> applyDBScanSD(ArrayList<TrajectoryPoint> pointsList, double eps, int minPoints, 
-			double speed, double direction, boolean isStopPoint) {
+			double speed, double direction, boolean isStopPoint) {		
 		
-	      for(int index=0;index<pointsList.size();index++) {
-	    	  // we should mark the point as visited, here it is no problem it is because 
-	    	  // here we use a for loop , it can stop 	  	    	  
+	    for(int index=0;index<pointsList.size();index++) {	    	
+	    	// we should mark the point as visited, here it is no problem it is because 
+	    	// here we use a for loop , it can stop 	  	    	  
 	        ArrayList<TrajectoryPoint> tmpLst = new ArrayList<TrajectoryPoint>();
 	        TrajectoryPoint p = pointsList.get(index);
 	        if(p.isVisited()&&index!=(pointsList.size()-1)&&index%4096!=0)
@@ -45,23 +43,23 @@ public class DBScanSD {
 				
 				if((index%4096==0)||(index==(pointsList.size()-1)))  { 					
 					while(flag) {
-				    	  flag = false;
-					      for(int i=0;i<length;i++){
-					        for(int j=0;j<length;j++){
-					          if(i!=j){
-					        	  if(i == length) {
-					        		  flag = true;
-					        		  continue;
-					        	  }
-					        	  if(mergeClusters(resultClusters.get(i), resultClusters.get(j))) {
-					            	resultClusters.remove(j);
-					            	j--;
-					            	length--;
-					        	  }
-					          }
-					        }
-						 }
+						flag = false;
+					    for(int i=0;i<length;i++){					    	  
+				    	  for(int j=0;j<length;j++){
+				    		  if(i!=j){
+				    			  if(i == length) {
+				    				  flag = true;
+				    				  continue;
+				    			  }
+				    			  if(mergeClusters(resultClusters.get(i), resultClusters.get(j))) {
+				    				  resultClusters.remove(j);
+				    				  j--;
+				    				  length--;
+				    			  }
+				    		  }
+				    	  }
 				      }
+					}
 				}
 	        }
 	      }
@@ -92,15 +90,13 @@ public class DBScanSD {
 				if(!clusterA.getCluster().contains(clusterB.getCluster().get(index))) {
 					clusterA.getCluster().add(clusterB.getCluster().get(index));
 				}
-			}
-						
+			}			
 		}
-		
 		return merge;
 		
 	}
 	
-	
+
 	
 	public ArrayList<TrajectoryPoint> isCorePoint(ArrayList<TrajectoryPoint> lst, TrajectoryPoint p,
 			double eps, int minPoints, double speed, double direction, boolean isStopPoint) {
