@@ -31,8 +31,6 @@ public class MappingPoint extends TrajectoryPoint{
 			mappingtude = (p.getLongitude()+(1.0/Math.tan(angle))*p.getLatitude())*Math.sin(angle);
 		} else if((avgCOG>=270&&avgCOG<360)) {
 			mappingtude = (p.getLatitude()-(Math.tan(Math.PI*2-angle))*p.getLongitude())*Math.cos(Math.PI*2-angle);
-			
-
 		} else if(avgCOG>=90&&avgCOG<180) {
 			mappingtude = ((Math.tan(Math.PI-angle))*p.getLongitude()-p.getLatitude())*Math.cos(Math.PI-angle);
 		} else if(avgCOG>=180&&avgCOG<270) {
@@ -51,9 +49,6 @@ public class MappingPoint extends TrajectoryPoint{
 	public void setMappingtude(double mappingtude) {
 		this.mappingtude = mappingtude;
 	}
-	
-	
-	
 	
 
 }
