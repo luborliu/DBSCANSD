@@ -5,7 +5,7 @@ Java implementation for DBSCANSD, a trajectory clustering algorithm.
 
 DBSCANSD (Density-Based Spatial Clustering of Applicationswith Noise considering Speed and Direction)[1] is a clustering algorithm extended from DBSCAN [2]. It can consider speed and direction, which is essential for maritime lanes extraction. The output of this algorithm is a set of Gravity Vectors (GV) and  Sampled Stopping Points (SSP). 
 
-In the present verstion, the implementation has not included generating SSP yet, but I shall add this part later.
+In the present version, the implementation has not included generating SSP yet, but I shall add this part later.
 
 Since the AIS data provided for this project is confidential, I cannot upload it to github as example. But it will be great if you use this algorithm for other domains' problems, such as tracking data of vehicles, pedestrian, hurricane or animals. 
 
