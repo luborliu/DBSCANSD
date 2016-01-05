@@ -27,14 +27,24 @@ After downloading it to local,
 
 4. execute the program using the following either command:
 
-      java boliu.dbscansd.Main inputfile outputfile eps minPts maxSpd maxDir isStop 
-    
-        --e.g. java boliu.dbscansd.Main toy_data.csv output 70000 0.03 50 2 2.5 0
+      java boliu.dbscansd.Main inputfile outputfile lineNum eps minPts maxSpd maxDir isStop 
+      
+        * @param inputfile the input file path
+    	* @param outputfile the output file path
+    	* @param lineNum   the designated number of trajectory points for clustering (if the size of the input file is less than lineNum, it will extract all the points)
+    	* @param eps       1st parameter of DBSCANSD, the radius
+    	* @param minPts    2nd parameter of DBSCANSD, the minimum number of points
+    	* @param maxSpd	3rd parameter of DBSCANSD, the maximum SOG difference
+    	* @param maxDir	4th parameter of DBSCANSD, the maximum COG difference
+    	* @param isStop	boolean value (0/1), if you would like to cluster stopping points (1) or moving points (0)
+    	
+    --e.g. java boliu.dbscansd.Main toy_data.csv output 70000 0.03 50 2 2.5 0
         
         In this way, the program will do the job on toy_data.csv file. 
-        It will first extract the first 70,000 moving points from the data and then run DBSCANSD on the dataset. 
+        It will extract the first 70,000  moving points from the data and then run DBSCANSD on the dataset. 
         The final output will be two files: 
-          output_gv.csv (gravity vectors) and output_movingclusters.csv (original clustering results with more rows).
+           output_gv.csv (gravity vectors)
+           output_movingclusters.csv (original clustering results with more rows).
     
 
 
