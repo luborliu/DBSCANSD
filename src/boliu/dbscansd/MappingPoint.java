@@ -1,6 +1,6 @@
-package boliu.util;
+package boliu.dbscansd;
 
-import boliu.util.TrajectoryPoint;
+import boliu.dbscansd.TrajectoryPoint;
 /**
  * Mapping Point is the point that is mapped onto the
  *  axis (average direction of the whole cluster)

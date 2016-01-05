@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import boliu.dbscansd.Cluster;
-import boliu.util.GravityVector;
-import boliu.util.MappingPoint;
 
 
 public class GravityVectorExtraction {

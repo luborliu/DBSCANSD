@@ -3,8 +3,6 @@ package boliu.dbscansd;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import boliu.util.TrajectoryPoint;
-
 public class DBScanSD {
 	
 	private ArrayList<Cluster> resultClusters = new ArrayList<Cluster>();

@@ -1,7 +1,6 @@
 package boliu.dbscansd;
 
 import java.util.ArrayList;
-import boliu.util.TrajectoryPoint;
 
 /**
  * Cluster class, each cluster includes a set of trajectory points

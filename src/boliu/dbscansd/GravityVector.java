@@ -1,5 +1,5 @@
-package boliu.util;
-import boliu.util.TrajectoryPoint;
+package boliu.dbscansd;
+import boliu.dbscansd.TrajectoryPoint;
 /**
  * Gravity Vector class, it includes longitude, latitude, sog, cog and median distance
  * @author Bo Liu

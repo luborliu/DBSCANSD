@@ -1,4 +1,4 @@
-package boliu.util;
+package boliu.dbscansd;
 /**
  * Trajectory Point class
  * @author Bo Liu
