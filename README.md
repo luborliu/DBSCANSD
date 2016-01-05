@@ -29,14 +29,14 @@ After downloading it to local,
 
       java boliu.dbscansd.Main inputfile outputfile lineNum eps minPts maxSpd maxDir isStop 
       
-        * @param inputfile the input file path
-    	* @param outputfile the output file path
+        * @param           inputfile the input file path
+    	* @param           outputfile the output file path
     	* @param lineNum   the designated number of trajectory points for clustering (if the size of the input file is less than lineNum, it will extract all the points)
     	* @param eps       1st parameter of DBSCANSD, the radius
     	* @param minPts    2nd parameter of DBSCANSD, the minimum number of points
-    	* @param maxSpd	3rd parameter of DBSCANSD, the maximum SOG difference
-    	* @param maxDir	4th parameter of DBSCANSD, the maximum COG difference
-    	* @param isStop	boolean value (0/1), if you would like to cluster stopping points (1) or moving points (0)
+    	* @param maxSpd	   3rd parameter of DBSCANSD, the maximum SOG difference
+    	* @param maxDir	   4th parameter of DBSCANSD, the maximum COG difference
+    	* @param isStop	   boolean value (0/1), if you would like to cluster stopping points (1) or moving points (0)
     	
     --e.g. java boliu.dbscansd.Main toy_data.csv output 70000 0.03 50 2 2.5 0
         
